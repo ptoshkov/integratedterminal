@@ -9,47 +9,38 @@ classdef integratedterminal < handle
     end
 
     methods
-        function obj = integratedterminal()
+        function obj = integratedterminal(preferences)
             %INTEGRATEDTERMINAL Construct an instance of this class
             %   Detailed explanation goes here
+            [cd, ~] = fileparts(mfilename("fullpath"));
 
-            % Start server
+            %% Start server
             if computer == "PCWIN64"
-                system('start /B backend/index-win.exe');
+                system("start /B " + cd + "/../backend/index-win.exe");
             elseif computer == "GLNXA64"
-                system('backend/index-linux.exe &');
+                system(cd + "/../backend/index-linux.exe &");
             elseif computer == "MACI64"
-                system('backend/index-macos.exe &');
+                system(cd + "/../backend/index-macos.exe &");
             else
                 error('Unsupported operating system.');
             end
 
-            % Set up figure
-            obj.f = uifigure('WindowStyle', 'docked', ...
-                'CloseRequestFcn', @obj.closefigure);
+            %% Set up figure
+            obj.f = uifigure('WindowStyle', 'docked');
             g = uigridlayout(obj.f);
             g.RowHeight = {'1x'};
             g.ColumnWidth = {'1x'};
             obj.h = uihtml(g, ...
-                'HTMLSource', 'frontend/index.html', ...
+                'HTMLSource', cd + "/../frontend/index.html", ...
                 'HTMLEventReceivedFcn', @obj.receivedatafromfrontend);
 
-            % Set up client
+            %% Set up client
             obj.c = tcpclient('localhost', 8080);
             configureCallback(obj.c, 'byte', 1, @obj.receivedatafrombackend);
         end
 
         function delete(obj)
-            obj.closeconnection();
-            close(obj.f);
-        end
-
-        function closefigure(obj,src,event)
-            obj.closeconnection();
-            delete(src);
-        end
-
-        function closeconnection(obj)
+            % Close connection
             delete(obj.c);
             clear obj.c
         end

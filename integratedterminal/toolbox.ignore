@@ -38,14 +38,7 @@
 **/slprj
 **/.buildtool/
 
-% Project resources folder
-resources/
-
-+integratedterminalpreferences/integratedterminalpreferences.json
++controller/preferences.json
 backend/index.js
 backend/node_modules/
 **/package*.json
-build.sh
-deploymentLog.html
-LICENSE.txt
-README.md

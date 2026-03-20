@@ -8,8 +8,8 @@ const server = net.createServer((socket) => {
 
   var ptyProcess = pty.spawn(shell, [], {
     name: "xterm-color",
-    cols: 80,
-    rows: 30,
+    cols: 100,
+    rows: 40,
     cwd: process.env.HOME,
     env: process.env,
   });

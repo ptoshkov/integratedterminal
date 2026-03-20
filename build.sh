@@ -8,15 +8,15 @@ command -V npm
 command -V pkg
 
 ## Set up frontend
-cd frontend
+cd integratedterminal/frontend
 npm install
-cd ..
+cd ../..
 
 ## Set up backend
-cd backend
+cd integratedterminal/backend
 npm install
 npm run build
-cd ..
+cd ../..
 
 ## Package toolbox
 matlab -batch "matlab.addons.toolbox.packageToolbox('integratedterminal.prj')"
