@@ -16,11 +16,11 @@ classdef integratedterminal < handle
 
             %% Start server
             if computer == "PCWIN64"
-                system("start /B " + cd + "/../backend/index-win.exe");
+                system("start /B " + cd + "/../backend/index-win.exe " + '"' + preferences.json + '"');
             elseif computer == "GLNXA64"
-                system(cd + "/../backend/index-linux.exe &");
+                system(cd + "/../backend/index-linux.exe " + '"' + preferences.json + '" &');
             elseif computer == "MACI64"
-                system(cd + "/../backend/index-macos.exe &");
+                system(cd + "/../backend/index-macos.exe " + '"' + preferences.json + '" &');
             else
                 error('Unsupported operating system.');
             end
@@ -31,6 +31,7 @@ classdef integratedterminal < handle
             g.RowHeight = {'1x'};
             g.ColumnWidth = {'1x'};
             obj.h = uihtml(g, ...
+                'Data', fileread(preferences.json), ...
                 'HTMLSource', cd + "/../frontend/index.html", ...
                 'HTMLEventReceivedFcn', @obj.receivedatafromfrontend);
 

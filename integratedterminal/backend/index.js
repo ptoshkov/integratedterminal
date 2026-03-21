@@ -1,12 +1,15 @@
 const net = require("net");
 const pty = require("node-pty");
-const os = require("os");
-var shell = os.platform() === "win32" ? "powershell.exe" : "bash";
+const fs = require("fs");
+const jsonpath = process.argv[2];
+const json = JSON.parse(fs.readFileSync(jsonpath));
+const shell = json["Shell Path"];
+const args = json["Shell Arguments"];
 
 const server = net.createServer((socket) => {
   console.log("MATLAB connected.");
 
-  var ptyProcess = pty.spawn(shell, [], {
+  let ptyProcess = pty.spawn(shell, args, {
     name: "xterm-color",
     cols: 100,
     rows: 40,

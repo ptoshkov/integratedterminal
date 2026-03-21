@@ -4,6 +4,7 @@ classdef integratedterminalpreferences
 
     properties
         json
+        help
     end
 
     methods
@@ -12,6 +13,7 @@ classdef integratedterminalpreferences
             %   Detailed explanation goes here
             [cd, ~] = fileparts(mfilename("fullpath"));
             obj.json = cd + "/preferences.json";
+            obj.help = cd + "/help.txt";
 
             if ~isfile(obj.json)
                 if computer == "PCWIN64"
@@ -29,6 +31,7 @@ classdef integratedterminalpreferences
         function open(obj)
             %METHOD1 Summary of this method goes here
             %   Detailed explanation goes here
+            open(obj.help);
             open(obj.json);
         end
     end

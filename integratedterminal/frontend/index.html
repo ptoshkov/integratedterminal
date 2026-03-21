@@ -8,7 +8,9 @@
       <div id="terminal"></div>
       <script>
         function setup(htmlComponent) {
-          var term = new Terminal();
+          let term = new Terminal();
+          let preferences = JSON.parse(htmlComponent.Data);
+          term.options = preferences.options;
           term.open(document.getElementById("terminal"));
 
           term.onData((data) => {
