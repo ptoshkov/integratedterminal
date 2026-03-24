@@ -14,6 +14,7 @@ VS Code-style integrated terminal for the MATLAB IDE.
 ### Changing the Theme
 ### Changing the Behavior
 ### Adding a Shortcut
+### Resetting the Preferences
 
 ## Build From Source
 ## FAQ
