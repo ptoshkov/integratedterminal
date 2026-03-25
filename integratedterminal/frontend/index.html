@@ -10,6 +10,7 @@
         function setup(htmlComponent) {
           let term = new Terminal();
           let preferences = JSON.parse(htmlComponent.Data);
+          term.resize(preferences.cols, preferences.rows);
           term.options = preferences.options;
           term.open(document.getElementById("terminal"));
 

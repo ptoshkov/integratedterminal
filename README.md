@@ -10,6 +10,7 @@ VS Code-style integrated terminal for the MATLAB IDE.
 
 ## Tutorial
 ### Changing the Shell
+### Changing the Size
 ### Changing the Font
 ### Changing the Theme
 ### Changing the Behavior

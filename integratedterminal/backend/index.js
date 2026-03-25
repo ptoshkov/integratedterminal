@@ -5,14 +5,16 @@ const jsonpath = process.argv[2];
 const json = JSON.parse(fs.readFileSync(jsonpath));
 const shell = json["Shell Path"];
 const args = json["Shell Arguments"];
+const cols = json["cols"];
+const rows = json["rows"];
 
 const server = net.createServer((socket) => {
   console.log("MATLAB connected.");
 
   let ptyProcess = pty.spawn(shell, args, {
     name: "xterm-color",
-    cols: 100,
-    rows: 40,
+    cols: cols,
+    rows: rows,
     cwd: process.env.HOME,
     env: process.env,
   });

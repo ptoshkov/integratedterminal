@@ -1,6 +1,8 @@
 {
     "Shell Path": "bash",
     "Shell Arguments": ["--login"],
+    "cols": 80,
+    "rows": 24,
     "options": {
         "allowProposedApi": false,
         "allowTransparency": false,
@@ -16,7 +18,7 @@
         "drawBoldTextInBrightColors": true,
         "fastScrollSensitivity": 5,
         "fontFamily": "monospace",
-        "fontSize": 15,
+        "fontSize": 11,
         "fontWeight": "normal",
         "fontWeightBold": "bold",
         "ignoreBracketedPasteMode": false,

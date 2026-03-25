@@ -13,14 +13,15 @@ classdef integratedterminal < handle
             %INTEGRATEDTERMINAL Construct an instance of this class
             %   Detailed explanation goes here
             [cd, ~] = fileparts(mfilename("fullpath"));
+            arg1 = '"' + preferences.json + '"';
 
             %% Start server
             if computer == "PCWIN64"
-                system("start /B " + cd + "/../backend/index-win.exe " + '"' + preferences.json + '"');
+                system("start /B " + cd + "/../backend/index-win.exe " + arg1);
             elseif computer == "GLNXA64"
-                system(cd + "/../backend/index-linux.exe " + '"' + preferences.json + '" &');
+                system(cd + "/../backend/index-linux.exe " + arg1 + " &");
             elseif computer == "MACI64"
-                system(cd + "/../backend/index-macos.exe " + '"' + preferences.json + '" &');
+                system(cd + "/../backend/index-macos.exe " + arg1 + " &");
             else
                 error('Unsupported operating system.');
             end
