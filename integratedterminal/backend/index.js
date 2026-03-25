@@ -1,6 +1,7 @@
 const net = require("net");
 const pty = require("node-pty");
 const fs = require("fs");
+const terminator = String.fromCharCode(0);
 const jsonpath = process.argv[2];
 const json = JSON.parse(fs.readFileSync(jsonpath));
 const shell = json["Shell Path"];
@@ -20,7 +21,7 @@ const server = net.createServer((socket) => {
   });
 
   ptyProcess.on("data", function (data) {
-    socket.write(data);
+    socket.write(data + terminator);
   });
 
   socket.on("data", (data) => {

@@ -2,6 +2,10 @@ classdef integratedterminal < handle
     %INTEGRATEDTERMINAL Summary of this class goes here
     %   Detailed explanation goes here
 
+    properties (Constant)
+        terminator = 0
+    end
+
     properties
         f
         h
@@ -38,7 +42,8 @@ classdef integratedterminal < handle
 
             %% Set up client
             obj.c = tcpclient('localhost', 8080);
-            configureCallback(obj.c, 'byte', 1, @obj.receivedatafrombackend);
+            configureTerminator(obj.c, obj.terminator);
+            configureCallback(obj.c, 'terminator', @obj.receivedatafrombackend);
         end
 
         function delete(obj)
@@ -56,10 +61,8 @@ classdef integratedterminal < handle
                 event
             end
 
-            if obj.c.NumBytesAvailable > 0
-                data = read(obj.c);
-                sendEventToHTMLSource(obj.h, 'EventToFrontend', char(data));
-            end
+            data = read(obj.c, obj.c.NumBytesAvailable, 'string');
+            sendEventToHTMLSource(obj.h, 'EventToFrontend', data);
         end
 
         function receivedatafromfrontend(obj,src,event)
