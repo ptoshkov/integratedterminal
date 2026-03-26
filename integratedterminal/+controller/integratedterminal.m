@@ -61,7 +61,8 @@ classdef integratedterminal < handle
                 event
             end
 
-            data = read(obj.c, obj.c.NumBytesAvailable, 'string');
+            data = read(obj.c, obj.c.NumBytesAvailable, 'uint8');
+            data = native2unicode(data, 'UTF-8');
             sendEventToHTMLSource(obj.h, 'EventToFrontend', data);
         end
 
