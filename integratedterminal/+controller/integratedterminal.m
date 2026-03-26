@@ -13,22 +13,10 @@ classdef integratedterminal < handle
     end
 
     methods
-        function obj = integratedterminal(preferences)
+        function obj = integratedterminal(preferences, pty)
             %INTEGRATEDTERMINAL Construct an instance of this class
             %   Detailed explanation goes here
             [cd, ~] = fileparts(mfilename("fullpath"));
-            arg1 = '"' + preferences.json + '"';
-
-            %% Start server
-            if computer == "PCWIN64"
-                system("start /B " + cd + "/../backend/index-win.exe " + arg1);
-            elseif computer == "GLNXA64"
-                system(cd + "/../backend/index-linux.exe " + arg1 + " &");
-            elseif computer == "MACI64"
-                system(cd + "/../backend/index-macos.exe " + arg1 + " &");
-            else
-                error('Unsupported operating system.');
-            end
 
             %% Set up figure
             obj.f = uifigure('WindowStyle', 'docked');
@@ -41,7 +29,7 @@ classdef integratedterminal < handle
                 'HTMLEventReceivedFcn', @obj.receivedatafromfrontend);
 
             %% Set up client
-            obj.c = tcpclient('localhost', 8080);
+            obj.c = tcpclient(pty.pty.address, pty.pty.port);
             configureTerminator(obj.c, obj.terminator);
             configureCallback(obj.c, 'terminator', @obj.receivedatafrombackend);
         end
@@ -55,12 +43,6 @@ classdef integratedterminal < handle
         function receivedatafrombackend(obj,src,event)
             %RECEIVEDATAFROMBACKEND Summary of this function goes here
             %   Detailed explanation goes here
-            arguments (Input)
-                obj
-                src
-                event
-            end
-
             data = read(obj.c, obj.c.NumBytesAvailable, 'uint8');
             data = native2unicode(data, 'UTF-8');
             sendEventToHTMLSource(obj.h, 'EventToFrontend', data);
@@ -69,12 +51,6 @@ classdef integratedterminal < handle
         function receivedatafromfrontend(obj,src,event)
             %RECEIVEDATAFROMFRONTEND Summary of this function goes here
             %   Detailed explanation goes here
-            arguments (Input)
-                obj
-                src
-                event
-            end
-
             write(obj.c, event.HTMLEventData);
         end
     end

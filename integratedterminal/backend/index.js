@@ -2,12 +2,14 @@ const net = require("net");
 const pty = require("node-pty");
 const fs = require("fs");
 const terminator = String.fromCharCode(0);
-const jsonpath = process.argv[2];
-const json = JSON.parse(fs.readFileSync(jsonpath));
-const shell = json["Shell Path"];
-const args = json["Shell Arguments"];
-const cols = json["cols"];
-const rows = json["rows"];
+const prefjsonpath = process.argv[2];
+const prefjson = JSON.parse(fs.readFileSync(prefjsonpath));
+const shell = prefjson["Shell Path"];
+const args = prefjson["Shell Arguments"];
+const cols = prefjson["cols"];
+const rows = prefjson["rows"];
+const ptyjsonpath = process.argv[3];
+const ptyjsonpathtmp = ptyjsonpath + "tmp";
 
 const server = net.createServer((socket) => {
   console.log("MATLAB connected.");
@@ -36,4 +38,11 @@ const server = net.createServer((socket) => {
   });
 });
 
-server.listen(8080, () => console.log("Server listening on port 8080."));
+// Grab an arbitrary unused port.
+server.listen(0, "127.0.0.1", () => {
+  let addr = server.address();
+  console.log("Server listening on", addr);
+  fs.writeFileSync(ptyjsonpathtmp, JSON.stringify(addr));
+  fs.copyFileSync(ptyjsonpathtmp, ptyjsonpath);
+  fs.unlinkSync(ptyjsonpathtmp);
+});
