@@ -20,7 +20,7 @@ classdef integratedterminalpreferences
                     copyfile(cd + "/defaultwindows.json", obj.json);
                 elseif computer == "GLNXA64"
                     copyfile(cd + "/defaultlinux.json", obj.json);
-                elseif computer == "MACI64"
+                elseif computer == "MACI64" || computer == "MACA64"
                     copyfile(cd + "/defaultmacos.json", obj.json);
                 else
                     error('Unsupported operating system.');

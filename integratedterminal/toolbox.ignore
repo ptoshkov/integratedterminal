@@ -39,6 +39,7 @@
 **/.buildtool/
 
 +controller/preferences.json
++controller/pty.json
 backend/index.js
 backend/node_modules/
 **/package*.json

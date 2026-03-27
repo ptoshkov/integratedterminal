@@ -2,10 +2,6 @@ classdef integratedterminal < handle
     %INTEGRATEDTERMINAL Summary of this class goes here
     %   Detailed explanation goes here
 
-    properties (Constant)
-        terminator = 0
-    end
-
     properties
         f
         h
@@ -30,7 +26,7 @@ classdef integratedterminal < handle
 
             %% Set up client
             obj.c = tcpclient(pty.pty.address, pty.pty.port);
-            configureTerminator(obj.c, obj.terminator);
+            configureTerminator(obj.c, 0);
             configureCallback(obj.c, 'terminator', @obj.receivedatafrombackend);
         end
 
@@ -43,7 +39,7 @@ classdef integratedterminal < handle
         function receivedatafrombackend(obj,src,event)
             %RECEIVEDATAFROMBACKEND Summary of this function goes here
             %   Detailed explanation goes here
-            data = read(obj.c, obj.c.NumBytesAvailable, 'uint8');
+            data = read(obj.c, obj.c.NumBytesAvailable, 'string');
             data = native2unicode(data, 'UTF-8');
             sendEventToHTMLSource(obj.h, 'EventToFrontend', data);
         end
