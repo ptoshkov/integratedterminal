@@ -25,7 +25,7 @@ classdef integratedterminallatch < handle
 
             while isfile(obj.tmp)
                 if seconds(datetime() - t) > timeout
-                    error("Could not obtain server information.");
+                    error("Timed out waiting for latch.");
                 end
             end
         end
