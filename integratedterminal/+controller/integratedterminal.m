@@ -6,6 +6,7 @@ classdef integratedterminal < handle
         f
         h
         c
+        warningstate
     end
 
     methods
@@ -16,7 +17,8 @@ classdef integratedterminal < handle
 
             %% Set up figure
             obj.f = uifigure('WindowStyle', 'docked', ...
-                             'Name', 'Terminal');
+                             'Name', 'Terminal', ...
+                             'Icon', cd + "/../images/integratedTerminal.png");
             g = uigridlayout(obj.f);
             g.RowHeight = {'1x'};
             g.ColumnWidth = {'1x'};
@@ -32,27 +34,26 @@ classdef integratedterminal < handle
             configureCallback(obj.c, ...
                               'byte', 1, ...
                               @obj.receivedatafrombackend);
+
+            %% Disable TCP receive callback timeout warning
+            obj.warningstate = warning('query', 'MATLAB:callback:DynamicPropertyEventError').state;
+            warning('off', 'MATLAB:callback:DynamicPropertyEventError');
         end
 
         function delete(obj)
-            % Close connection
-            warning('off', 'MATLAB:class:DestructorError');
+            %% Close connection
+            flush(obj.c);
             delete(obj.c);
             clear obj.c
-            warning('on', 'MATLAB:class:DestructorError');
+
+            %% Reset TCP receive callback timeout warning
+            warning(obj.warningstate, 'MATLAB:callback:DynamicPropertyEventError');
         end
 
         function receivedatafrombackend(obj,src,event)
             %RECEIVEDATAFROMBACKEND Summary of this function goes here
             %   Detailed explanation goes here
-            warning('off', 'MATLAB:callback:DynamicPropertyEventError');
             data = read(obj.c, max(obj.c.BytesAvailableFcnCount, obj.c.NumBytesAvailable));
-            warning('on', 'MATLAB:callback:DynamicPropertyEventError');
-
-            if isempty(data)
-                return;
-            end
-
             data = native2unicode(data, 'UTF-8');
             sendEventToHTMLSource(obj.h, 'EventToFrontend', data);
         end

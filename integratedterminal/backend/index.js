@@ -7,27 +7,23 @@ const pref = JSON.parse(fs.readFileSync(prefjson));
 const ptyjson = process.argv[3];
 const tmpfile = process.argv[4];
 
-let ptyProcess = pty.spawn(pref["Shell Path"], pref["Shell Arguments"], {
-  name: "xterm-color",
-  cols: pref["cols"],
-  rows: pref["rows"],
-  cwd: process.env.HOME,
-  env: process.env,
-});
-
-ptyProcess.pause();
-
 const server = net.createServer((socket) => {
   console.log("MATLAB connected.");
   connected = true;
   socket.setNoDelay(true);
   socket.setKeepAlive(true);
 
+  let ptyProcess = pty.spawn(pref["Shell Path"], pref["Shell Arguments"], {
+    name: "xterm-color",
+    cols: pref["cols"],
+    rows: pref["rows"],
+    cwd: process.env.HOME,
+    env: process.env,
+  });
+
   ptyProcess.on("data", function (data) {
     socket.write(data);
   });
-
-  ptyProcess.resume();
 
   socket.on("data", (data) => {
     ptyProcess.write(data.toString());
@@ -60,5 +56,5 @@ server.listen(0, "127.0.0.1", () => {
   // Decrement the latch so the MATLAB process will be unblocked.
   fs.unlinkSync(tmpfile);
 
-  setTimeout(handleConnectionTimeout, 20_000);
+  setTimeout(handleConnectionTimeout, 60_000);
 });

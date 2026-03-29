@@ -3,6 +3,7 @@ classdef integratedterminalpreferences
     %   Detailed explanation goes here
 
     properties
+        cd
         json
         help
     end
@@ -11,28 +12,47 @@ classdef integratedterminalpreferences
         function obj = integratedterminalpreferences()
             %INTEGRATEDTERMINALPREFERENCES Construct an instance of this class
             %   Detailed explanation goes here
-            [cd, ~] = fileparts(mfilename("fullpath"));
-            obj.json = cd + "/preferences.json";
-            obj.help = cd + "/help.txt";
+            [obj.cd, ~] = fileparts(mfilename("fullpath"));
+            obj.json = obj.cd + "/preferences.json";
+            obj.help = obj.cd + "/help.txt";
 
             if ~isfile(obj.json)
-                if computer == "PCWIN64"
-                    copyfile(cd + "/defaultwindows.json", obj.json);
-                elseif computer == "GLNXA64"
-                    copyfile(cd + "/defaultlinux.json", obj.json);
-                elseif computer == "MACI64" || computer == "MACA64"
-                    copyfile(cd + "/defaultmacos.json", obj.json);
-                else
-                    error('Unsupported operating system.');
-                end
+                obj.reset();
             end
         end
 
-        function open(obj)
+        function reset(obj)
             %METHOD1 Summary of this method goes here
             %   Detailed explanation goes here
-            open(obj.help);
-            open(obj.json);
+            if computer == "PCWIN64"
+                copyfile(obj.cd + "/defaultwindows.json", obj.json);
+            elseif computer == "GLNXA64"
+                copyfile(obj.cd + "/defaultlinux.json", obj.json);
+            elseif computer == "MACI64" || computer == "MACA64"
+                copyfile(obj.cd + "/defaultmacos.json", obj.json);
+            else
+                error('Unsupported operating system.');
+            end
+        end
+
+        function txt = read(obj)
+            %METHOD1 Summary of this method goes here
+            %   Detailed explanation goes here
+            txt = fileread(obj.json);
+        end
+
+        function txt = gethelp(obj)
+            %METHOD1 Summary of this method goes here
+            %   Detailed explanation goes here
+            txt = fileread(obj.help);
+        end
+
+        function write(obj, txtCell)
+            %METHOD1 Summary of this method goes here
+            %   Detailed explanation goes here
+            tmp = tempname + ".txt";
+            writecell(txtCell, tmp, "QuoteStrings", false);
+            movefile(tmp, obj.json);
         end
     end
 end

@@ -1,4 +1,6 @@
 # Integrated Terminal
+<img width="676" height="369" alt="integratedTerminal" src="https://github.com/user-attachments/assets/caf8af7f-1328-4dc4-a81f-8dda9e41c05d" />
+
 VS Code-style integrated terminal for the MATLAB IDE.
 
 ## Getting Started Guide

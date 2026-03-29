@@ -28,7 +28,7 @@ classdef integratedterminalpty < handle
                 error("Unsupported operating system.");
             end
 
-            latch.wait(10);
+            latch.wait(60);
             obj.pty = jsondecode(fileread(obj.json));
         end
     end
