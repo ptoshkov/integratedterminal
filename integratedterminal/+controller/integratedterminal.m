@@ -6,7 +6,6 @@ classdef integratedterminal < handle
         f
         h
         c
-        warningstate
     end
 
     methods
@@ -29,15 +28,10 @@ classdef integratedterminal < handle
 
             %% Set up client
             obj.c = tcpclient(pty.pty.address, pty.pty.port, ...
-                              'Timeout', 0.05, ...
                               'EnableTransferDelay', false);
             configureCallback(obj.c, ...
-                              'byte', 1, ...
+                              'byte', 128, ...
                               @obj.receivedatafrombackend);
-
-            %% Disable TCP receive callback timeout warning
-            obj.warningstate = warning('query', 'MATLAB:callback:DynamicPropertyEventError').state;
-            warning('off', 'MATLAB:callback:DynamicPropertyEventError');
         end
 
         function delete(obj)
@@ -45,15 +39,12 @@ classdef integratedterminal < handle
             flush(obj.c);
             delete(obj.c);
             clear obj.c
-
-            %% Reset TCP receive callback timeout warning
-            warning(obj.warningstate, 'MATLAB:callback:DynamicPropertyEventError');
         end
 
         function receivedatafrombackend(obj,src,event)
             %RECEIVEDATAFROMBACKEND Summary of this function goes here
             %   Detailed explanation goes here
-            data = read(obj.c, max(obj.c.BytesAvailableFcnCount, obj.c.NumBytesAvailable));
+            data = read(obj.c, 128);
             data = native2unicode(data, 'UTF-8');
             sendEventToHTMLSource(obj.h, 'EventToFrontend', data);
         end

@@ -23,6 +23,12 @@ const server = net.createServer((socket) => {
 
   ptyProcess.on("data", function (data) {
     socket.write(data);
+    const rem = data.length % 128;
+
+    if (rem) {
+      const buf = Buffer.alloc(128 - rem);
+      socket.write(buf);
+    }
   });
 
   socket.on("data", (data) => {
