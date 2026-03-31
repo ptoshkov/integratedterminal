@@ -1,5 +1,5 @@
 # Integrated Terminal
-<img width="676" height="369" alt="integratedTerminal" src="https://github.com/user-attachments/assets/caf8af7f-1328-4dc4-a81f-8dda9e41c05d" />
+<img width="677" height="369" alt="integratedTerminal" src="https://github.com/user-attachments/assets/aa5faded-ed93-4c3e-b57b-7f3953253a2b" />
 
 VS Code-style integrated terminal for the MATLAB IDE.
 
