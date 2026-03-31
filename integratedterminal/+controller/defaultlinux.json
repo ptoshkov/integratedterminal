@@ -1,8 +1,20 @@
 {
+    // Full path to the shell executable, such as C:/Git/bin/bash.exe,
+    // or only the executable name if the executable is on the path.
     "Shell Path": "bash",
+
+    // Comma-separated list of command line arguments for the shell,
+    // for example ["--login", "--interactive"].
     "Shell Arguments": ["--login"],
+
+    // The number of columns that the terminal has.
     "cols": 80,
+
+    // The number of rows that the terminal has.
     "rows": 24,
+
+    // See https://xtermjs.org/docs/api/terminal/interfaces/iterminaloptions/
+    // for a description of the fields and their values.
     "options": {
         "allowProposedApi": false,
         "allowTransparency": false,
