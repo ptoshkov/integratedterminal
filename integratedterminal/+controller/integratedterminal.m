@@ -6,6 +6,7 @@ classdef integratedterminal < handle
         f
         h
         c
+        cm
     end
 
     methods
@@ -25,6 +26,10 @@ classdef integratedterminal < handle
                            'Data', fileread(preferences.json), ...
                            'HTMLSource', cd + "/../frontend/index.html", ...
                            'HTMLEventReceivedFcn', @obj.receivedatafromfrontend);
+            obj.cm = uicontextmenu(obj.f);
+            uimenu(obj.cm,"Text","Open Profile","MenuSelectedFcn",@preferences.open);
+            uimenu(obj.cm,"Text","Edit Profile","MenuSelectedFcn",@preferences.edit);
+            obj.h.ContextMenu = obj.cm;
 
             %% Set up client
             obj.c = tcpclient(pty.pty.address, pty.pty.port, ...
@@ -52,7 +57,16 @@ classdef integratedterminal < handle
         function receivedatafromfrontend(obj,src,event)
             %RECEIVEDATAFROMFRONTEND Summary of this function goes here
             %   Detailed explanation goes here
-            write(obj.c, event.HTMLEventData);
+            if strcmp(event.HTMLEventName, 'EventToFrontend')
+                write(obj.c, event.HTMLEventData);
+            end
+
+            if strcmp(event.HTMLEventName, 'contextmenu')
+                p = getpixelposition(obj.h,true);
+                x = p(1)+event.HTMLEventData(1);
+                y = p(2)+p(4)-event.HTMLEventData(2);
+                open(obj.cm,x,y);
+            end
         end
     end
 end

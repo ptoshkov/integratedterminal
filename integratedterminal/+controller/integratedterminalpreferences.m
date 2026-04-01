@@ -11,10 +11,6 @@ classdef integratedterminalpreferences < handle
         function obj = integratedterminalpreferences(profile)
             %INTEGRATEDTERMINALPREFERENCES Construct an instance of this class
             %   Detailed explanation goes here
-            arguments
-                profile = []
-            end
-
             [cd, ~] = fileparts(mfilename("fullpath"));
             obj.destdir = cd + "/../profiles";
             default = obj.destdir + "/default.json";
@@ -37,18 +33,6 @@ classdef integratedterminalpreferences < handle
                 end
             end
 
-            if isempty(profile)
-                return;
-            end
-
-            obj.load(profile);
-        end
-
-        function delete(obj)
-            delete(obj.json);
-        end
-
-        function load(obj, profile)
             %% Copy the profile and strip the comments,
             %% because comments are not allowed in JSON
             jsonwithcomments = fileread(obj.destdir + "/" + profile);
@@ -59,7 +43,22 @@ classdef integratedterminalpreferences < handle
             obj.json = tmp + ".json";
         end
 
-        function open(obj)
+        function delete(obj)
+            delete(obj.json);
+        end
+
+        function open(obj, src, event)
+            [file, location] = uigetfile("*.json", "", obj.destdir);
+
+            if isequal(file,0)
+                % User selected Cancel
+                return;
+            else
+                integratedTerminal(string(file));
+            end
+        end
+
+        function edit(obj, src, event)
             [file, location] = uigetfile("*.json", "", obj.destdir);
 
             if isequal(file,0)

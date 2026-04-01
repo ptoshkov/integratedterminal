@@ -23,6 +23,12 @@
           function processEvent(event) {
             term.write("" + event.Data);
           }
+
+          document.getElementById("terminal").addEventListener("contextmenu", processRightClick);
+
+          function processRightClick(event) {
+            htmlComponent.sendEventToMATLAB("contextmenu", [event.clientX, event.clientY]);
+          }
         }
       </script>
     </body>
