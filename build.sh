@@ -6,6 +6,8 @@ command -V matlab
 command -V node
 command -V npm
 command -V pkg
+command -V pandoc
+command -V weasyprint
 
 ## Set up frontend
 cd integratedterminal/frontend
@@ -19,5 +21,6 @@ npm run build
 cd ../..
 
 ## Package toolbox
-cp LICENSE.txt integratedterminal/license.txt
+cp LICENSE.txt integratedterminal
+pandoc README.md -o integratedterminal/README.pdf -t html
 matlab -batch "matlab.addons.toolbox.packageToolbox('integratedterminal.prj')"

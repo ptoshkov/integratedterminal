@@ -12,7 +12,7 @@ classdef integratedterminalpreferences < handle
             %INTEGRATEDTERMINALPREFERENCES Construct an instance of this class
             %   Detailed explanation goes here
             [cd, ~] = fileparts(mfilename("fullpath"));
-            obj.destdir = cd + "/../profiles";
+            obj.destdir = fileparts(cd) + "/profiles";
             default = obj.destdir + "/default.json";
 
             %% Create the profiles directory if it doesn't exist
