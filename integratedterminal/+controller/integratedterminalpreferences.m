@@ -53,9 +53,14 @@ classdef integratedterminalpreferences < handle
             if isequal(file,0)
                 % User selected Cancel
                 return;
-            else
-                integratedTerminal(string(file));
             end
+
+            if fullfile(location, file) ~= fullfile(obj.destdir, file)
+                warning("The selected file is not in the profiles folder.");
+                return;
+            end
+
+            integratedTerminal(string(file));
         end
 
         function edit(obj, src, event)
@@ -64,9 +69,14 @@ classdef integratedterminalpreferences < handle
             if isequal(file,0)
                 % User selected Cancel
                 return;
-            else
-                open(fullfile(location, file));
             end
+
+            if fullfile(location, file) ~= fullfile(obj.destdir, file)
+                warning("The selected file is not in the profiles folder.");
+                return;
+            end
+
+            open(fullfile(location, file));
         end
     end
 end
