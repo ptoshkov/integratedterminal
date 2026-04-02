@@ -1,5 +1,5 @@
 # Integrated Terminal
-![Alt text](https://github.com/ptoshkov/integratedterminal/blob/main/integratedterminal/images/integratedTerminal.png?raw=true)
+![](integratedterminal/images/integratedTerminal.png)
 
 VS Code-style integrated terminal for the MATLAB IDE.
 
