@@ -19,5 +19,5 @@ npm run build
 cd ../..
 
 ## Package toolbox
-cp license.txt integratedterminal/license.txt
+cp LICENSE.txt integratedterminal/license.txt
 matlab -batch "matlab.addons.toolbox.packageToolbox('integratedterminal.prj')"
