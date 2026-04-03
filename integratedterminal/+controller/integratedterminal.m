@@ -27,8 +27,11 @@ classdef integratedterminal < handle
                            'HTMLSource', cd + "/../frontend/index.html", ...
                            'HTMLEventReceivedFcn', @obj.receivedatafromfrontend);
             obj.cm = uicontextmenu(obj.f);
+            uimenu(obj.cm,"Text","Copy");
+            uimenu(obj.cm,"Text","Paste");
             uimenu(obj.cm,"Text","Open Profile","MenuSelectedFcn",@preferences.open);
             uimenu(obj.cm,"Text","Edit Profile","MenuSelectedFcn",@preferences.edit);
+            uimenu(obj.cm,"Text","Help");
             obj.h.ContextMenu = obj.cm;
 
             %% Set up client

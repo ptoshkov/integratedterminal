@@ -11,9 +11,13 @@ VS Code-style integrated terminal for the MATLAB IDE.
 
 ## Tutorial
 ### Adding a Profile
-Open a new terminal and right click anywhere on the terminal. Select "Edit Profile". A file browser will open showing the contents of the profiles folder.
+Open a new terminal and right click anywhere on the terminal. Select "Edit Profile".
 
-Copy and paste *default.json*. Rename the new file to *custom.json*. Double click *custom.json*. The profile *custom.json* will be opened in the editor.
+![](integratedterminal/images/contextMenu.png)
+
+A file browser will open showing the contents of the profiles folder. Copy and paste *default.json*. Rename the new file to *custom.json*. Double click *custom.json*. The profile *custom.json* will be opened in the editor.
+
+![](integratedterminal/images/customProfile.png)
 
 Go back to the terminal. Right click and select "Open Profile". Double click *custom.json*. A new integrated terminal will be created with the profile *custom.json*.
 
@@ -30,7 +34,6 @@ Go back to the terminal. Right click and select "Open Profile". Double click *cu
 In order to build `Integrated Terminal` from source the following prerequisites need to be installed and on the path:
 - MATLAB R2023a or later (https://www.mathworks.com/products/matlab.html)
 - Node.js with npm (https://nodejs.org/en)
-- ncc (https://github.com/vercel/ncc)
 - pkg (https://github.com/vercel/pkg)
 - Pandoc (https://pandoc.org)
 - WeasyPrint (https://weasyprint.org)
