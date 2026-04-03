@@ -6,6 +6,7 @@ classdef integratedterminal < handle
         f
         h
         c
+        cd
         cm
     end
 
@@ -13,25 +14,25 @@ classdef integratedterminal < handle
         function obj = integratedterminal(preferences, pty)
             %INTEGRATEDTERMINAL Construct an instance of this class
             %   Detailed explanation goes here
-            [cd, ~] = fileparts(mfilename("fullpath"));
+            [obj.cd, ~] = fileparts(mfilename("fullpath"));
 
             %% Set up figure
             obj.f = uifigure('WindowStyle', 'docked', ...
                              'Name', 'Terminal', ...
-                             'Icon', cd + "/../images/integratedTerminal.png");
+                             'Icon', obj.cd + "/../images/integratedTerminal.png");
             g = uigridlayout(obj.f);
             g.RowHeight = {'1x'};
             g.ColumnWidth = {'1x'};
             obj.h = uihtml(g, ...
                            'Data', fileread(preferences.json), ...
-                           'HTMLSource', cd + "/../frontend/index.html", ...
+                           'HTMLSource', obj.cd + "/../frontend/index.html", ...
                            'HTMLEventReceivedFcn', @obj.receivedatafromfrontend);
             obj.cm = uicontextmenu(obj.f);
-            uimenu(obj.cm,"Text","Copy");
-            uimenu(obj.cm,"Text","Paste");
+            uimenu(obj.cm,"Text","Copy","MenuSelectedFcn",@obj.copy);
+            uimenu(obj.cm,"Text","Paste","MenuSelectedFcn",@obj.paste);
             uimenu(obj.cm,"Text","Open Profile","MenuSelectedFcn",@preferences.open);
             uimenu(obj.cm,"Text","Edit Profile","MenuSelectedFcn",@preferences.edit);
-            uimenu(obj.cm,"Text","Help");
+            uimenu(obj.cm,"Text","Help","MenuSelectedFcn",@obj.help);
             obj.h.ContextMenu = obj.cm;
 
             %% Set up client
@@ -70,6 +71,18 @@ classdef integratedterminal < handle
                 y = p(2)+p(4)-event.HTMLEventData(2);
                 open(obj.cm,x,y);
             end
+        end
+
+        function copy(obj, src, event)
+            clipboard('copy', 'foobar');
+        end
+
+        function paste(obj, src, event)
+            write(obj.c, clipboard('paste'));
+        end
+
+        function help(obj, src, event)
+            open(obj.cd + "/../README.pdf");
         end
     end
 end
