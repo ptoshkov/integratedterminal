@@ -45,6 +45,64 @@ You can set the key "fontFamily" to any CSS font family string. Refer to <https:
 ```
 
 ### Changing the Theme
+The easiest way to change the color theme is to go to <https://glitchbone.github.io/vscode-base16-term/#/>, choose the theme you want and click "Copy to clipboard". Paste the theme in the "theme" key:
+
+```
+"theme": {
+    "terminal.background":"#E3EFEF",
+    "terminal.foreground":"#6D828E",
+    "terminalCursor.background":"#6D828E",
+    "terminalCursor.foreground":"#6D828E",
+    "terminal.ansiBlack":"#E3EFEF",
+    "terminal.ansiBlue":"#868CB3",
+    "terminal.ansiBrightBlack":"#98AFB5",
+    "terminal.ansiBrightBlue":"#868CB3",
+    "terminal.ansiBrightCyan":"#86B3B3",
+    "terminal.ansiBrightGreen":"#87B386",
+    "terminal.ansiBrightMagenta":"#B386B2",
+    "terminal.ansiBrightRed":"#B38686",
+    "terminal.ansiBrightWhite":"#485867",
+    "terminal.ansiBrightYellow":"#AAB386",
+    "terminal.ansiCyan":"#86B3B3",
+    "terminal.ansiGreen":"#87B386",
+    "terminal.ansiMagenta":"#B386B2",
+    "terminal.ansiRed":"#B38686",
+    "terminal.ansiWhite":"#6D828E",
+    "terminal.ansiYellow":"#AAB386"
+},
+```
+
+Remove all occurences of `terminal.`. Replace all occurences of `terminalCursor.` with `cursor.`. The key should look like this in the end:
+
+```
+"theme": {
+    "background":"#E3EFEF",
+    "foreground":"#6D828E",
+    "cursor.background":"#6D828E",
+    "cursor.foreground":"#6D828E",
+    "ansiBlack":"#E3EFEF",
+    "ansiBlue":"#868CB3",
+    "ansiBrightBlack":"#98AFB5",
+    "ansiBrightBlue":"#868CB3",
+    "ansiBrightCyan":"#86B3B3",
+    "ansiBrightGreen":"#87B386",
+    "ansiBrightMagenta":"#B386B2",
+    "ansiBrightRed":"#B38686",
+    "ansiBrightWhite":"#485867",
+    "ansiBrightYellow":"#AAB386",
+    "ansiCyan":"#86B3B3",
+    "ansiGreen":"#87B386",
+    "ansiMagenta":"#B386B2",
+    "ansiRed":"#B38686",
+    "ansiWhite":"#6D828E",
+    "ansiYellow":"#AAB386"
+},
+```
+
+Now this profile will have the Brushtrees theme:
+
+![](integratedterminal/images/brushtrees.png)
+
 ### Changing the Behavior
 ### Adding a Shortcut
 ### Changing the Default Profile

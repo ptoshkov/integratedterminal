@@ -19,13 +19,23 @@ classdef integratedterminalpty < handle
 
             %% Start server
             if computer == "PCWIN64"
-                system("start /B " + cd + "/../backend/index-win.exe " + arg1 + " " + arg2 + " " + arg3);
+                ret = system( ...
+                    "start /B " + cd + "/../backend/index-win.exe " + arg1 + " " + arg2 + " " + arg3 ...
+                    );
             elseif computer == "GLNXA64"
-                system(cd + "/../backend/index-linux.exe " + arg1 + " " + arg2 + " " + arg3 + " &");
+                ret = system( ...
+                    cd + "/../backend/index-linux.exe " + arg1 + " " + arg2 + " " + arg3 + " &" ...
+                    );
             elseif computer == "MACI64" || computer == "MACA64"
-                system(cd + "/../backend/index-macos.exe " + arg1 + " " + arg2 + " " + arg3 + " &");
+                ret = system( ...
+                    cd + "/../backend/index-macos.exe " + arg1 + " " + arg2 + " " + arg3 + " &" ...
+                    );
             else
                 error("Unsupported operating system.");
+            end
+
+            if ret ~= 0
+                error("Failed to start pty server.")
             end
 
             latch.wait(60);
