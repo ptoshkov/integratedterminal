@@ -22,13 +22,29 @@ A file browser will open showing the contents of the profiles folder. Copy and p
 Go back to the terminal. Right click and select "Open Profile". Double click *custom.json*. A new integrated terminal will be created with the profile *custom.json*.
 
 ### Changing the Shell
+The shell that a profile uses is controlled by the key "Shell Path" in the profile JSON. Assuming you have the shell **magic.exe** installed at **C:/Magic/magic.exe**, you can make a profile use the shell by setting "Shell Path" to:
+
+```
+"Shell Path": "C:/Magic/magic.exe"
+```
+
 ### Changing the Size
+The size of the terminal is controlled by the "cols" and "rows" keys in the profile JSON:
+
+```
+"cols": 80
+"rows": 24
+```
+
 ### Changing the Font
 ### Changing the Theme
 ### Changing the Behavior
 ### Adding a Shortcut
 ### Changing the Default Profile
+Whichever profile is named *default.json* will be used as the default profile.
+
 ### Resetting the Default Profile
+Delete *default.json* to reset the default profile to factory settings.
 
 ## Build From Source
 In order to build `Integrated Terminal` from source the following prerequisites need to be installed and on the path:
