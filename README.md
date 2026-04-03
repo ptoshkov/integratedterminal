@@ -21,4 +21,15 @@ VS Code-style integrated terminal for the MATLAB IDE.
 ### Resetting the Default Profile
 
 ## Build From Source
+In order to build `Integrated Terminal` from source the following prerequisites need to be installed and on the path:
+- MATLAB R2023a or later (https://www.mathworks.com/products/matlab.html)
+- Node.js with npm (https://nodejs.org/en)
+- ncc (https://github.com/vercel/ncc)
+- pkg (https://github.com/vercel/pkg)
+- Pandoc (https://pandoc.org)
+- WeasyPrint (https://weasyprint.org)
+- Bash (on Windows you can use Git Bash or MSYS2)
+
+Clone the repo and run build.sh. The toolbox installer will be located in the folder *build/*.
+
 ## FAQ
