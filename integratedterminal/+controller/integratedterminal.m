@@ -71,10 +71,14 @@ classdef integratedterminal < handle
                 y = p(2)+p(4)-event.HTMLEventData(2);
                 open(obj.cm,x,y);
             end
+
+            if strcmp(event.HTMLEventName, 'ReportSelection')
+                clipboard('copy', event.HTMLEventData);
+            end
         end
 
         function copy(obj, src, event)
-            clipboard('copy', 'foobar');
+            sendEventToHTMLSource(obj.h, 'GetSelection');
         end
 
         function paste(obj, src, event)

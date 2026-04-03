@@ -29,6 +29,12 @@
           function processRightClick(event) {
             htmlComponent.sendEventToMATLAB("contextmenu", [event.clientX, event.clientY]);
           }
+
+          htmlComponent.addEventListener("GetSelection", processGetSelection);
+
+          function processGetSelection(event) {
+            htmlComponent.sendEventToMATLAB("ReportSelection", term.getSelection());
+          }
         }
       </script>
     </body>
