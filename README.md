@@ -25,18 +25,25 @@ Go back to the terminal. Right click and select "Open Profile". Double click *cu
 The shell that a profile uses is controlled by the key "Shell Path" in the profile JSON. Assuming you have the shell **magic.exe** installed at **C:/Magic/magic.exe**, you can make a profile use the shell by setting "Shell Path" to:
 
 ```
-"Shell Path": "C:/Magic/magic.exe"
+"Shell Path": "C:/Magic/magic.exe",
 ```
 
 ### Changing the Size
 The size of the terminal is controlled by the "cols" and "rows" keys in the profile JSON:
 
 ```
-"cols": 80
-"rows": 24
+"cols": 80,
+"rows": 24,
 ```
 
 ### Changing the Font
+You can set the key "fontFamily" to any CSS font family string. Refer to <https://www.w3.org/Style/Examples/007/fonts.en.html> for examples. To set the font to Times 8 pt. with fallback Times New Roman and last fallback serif family:
+
+```
+"fontFamily": "Times, Times New Roman, serif",
+"fontSize": 8,
+```
+
 ### Changing the Theme
 ### Changing the Behavior
 ### Adding a Shortcut
@@ -55,6 +62,6 @@ In order to build `Integrated Terminal` from source the following prerequisites 
 - WeasyPrint (https://weasyprint.org)
 - Bash (on Windows you can use Git Bash or MSYS2)
 
-Clone the repo and run build.sh. The toolbox installer will be located in the folder *build/*.
+Clone the repo and run **build.sh**. The toolbox installer will be located in the folder *build/*.
 
 ## FAQ
