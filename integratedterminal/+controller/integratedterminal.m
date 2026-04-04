@@ -45,7 +45,6 @@ classdef integratedterminal < handle
 
         function delete(obj)
             %% Close connection
-            flush(obj.c);
             delete(obj.c);
             clear obj.c
         end
