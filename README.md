@@ -123,3 +123,8 @@ In order to build `Integrated Terminal` from source the following prerequisites 
 Clone the repo and run **build.sh**. The toolbox installer will be located in the folder *build/*.
 
 ## FAQ
+### What operating systems are supported?
+Windows, macOS and Linux.
+
+### Does the toolbox work in MATLAB Online?
+No, the toolbox requires a pty server to run in the background, which is not possible in the MATLAB Online.
