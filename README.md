@@ -4,7 +4,7 @@
 VS Code-style integrated terminal for the MATLAB IDE.
 
 ## Getting Started Guide
-1. Download and install the toolbox from the releases page (LINK TBD), the MATLAB Central (LINK TBD) or the Add-On Explorer inside the MATLAB IDE.
+1. Download and install the toolbox from the releases page (https://github.com/ptoshkov/integratedterminal/releases), the MATLAB Central (LINK TBD) or the Add-On Explorer inside the MATLAB IDE.
 2. Click the APPS tab on the MATLAB Toolstrip.
 3. Click the dropdown arrow to show all apps.
 4. Click the Integrated Terminal app. An integrated terminal with the default profile will be opened.
