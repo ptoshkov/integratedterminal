@@ -40,6 +40,5 @@
 
 +controller/pty.json
 backend/index.js
-backend/node_modules/
 **/package*.json
 profiles/

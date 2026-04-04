@@ -22,6 +22,7 @@ npm run build
 chmod a+x index-win.exe
 chmod a+x index-linux
 chmod a+x index-macos
+cp -r ../../linux-x64/ node_modules/node-pty/prebuilds/
 cd ../..
 
 ## Package toolbox
