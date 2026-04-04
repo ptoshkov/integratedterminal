@@ -116,6 +116,7 @@ In order to build `Integrated Terminal` from source the following prerequisites 
 - MATLAB R2023a or later (https://www.mathworks.com/products/matlab.html)
 - Node.js with npm (https://nodejs.org/en)
 - pkg (https://github.com/vercel/pkg)
+- GNU Make
 - Pandoc (https://pandoc.org)
 - WeasyPrint (https://weasyprint.org)
 - Bash (on Windows you can use Git Bash or MSYS2)
