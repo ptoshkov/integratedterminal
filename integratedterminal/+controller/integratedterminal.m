@@ -39,7 +39,7 @@ classdef integratedterminal < handle
             obj.c = tcpclient(pty.pty.address, pty.pty.port, ...
                               'EnableTransferDelay', false);
             configureCallback(obj.c, ...
-                              'byte', 128, ...
+                              'byte', 256, ...
                               @obj.receivedatafrombackend);
         end
 
@@ -53,7 +53,7 @@ classdef integratedterminal < handle
         function receivedatafrombackend(obj,src,event)
             %RECEIVEDATAFROMBACKEND Summary of this function goes here
             %   Detailed explanation goes here
-            data = read(obj.c, 128);
+            data = read(obj.c, 256);
             data = native2unicode(data, 'UTF-8');
             sendEventToHTMLSource(obj.h, 'EventToFrontend', data);
         end
