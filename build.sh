@@ -6,6 +6,7 @@ command -V matlab
 command -V node
 command -V npm
 command -V pkg
+command -V make
 command -V pandoc
 command -V weasyprint
 
@@ -22,5 +23,5 @@ cd ../..
 
 ## Package toolbox
 cp LICENSE.txt integratedterminal
-pandoc README.md -o integratedterminal/README.pdf -t html
+pandoc README.md -o integratedterminal/README.pdf --pdf-engine weasyprint
 matlab -batch "matlab.addons.toolbox.packageToolbox('integratedterminal.prj')"
