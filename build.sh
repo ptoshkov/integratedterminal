@@ -19,6 +19,9 @@ cd ../..
 cd integratedterminal/backend
 npm install
 npm run build
+chmod a+x index-win.exe
+chmod a+x index-linux
+chmod a+x index-macos
 cd ../..
 
 ## Package toolbox
