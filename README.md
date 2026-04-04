@@ -128,4 +128,8 @@ Clone the repo and run **build.sh**. The toolbox installer will be located in th
 Windows, macOS and Linux.
 
 ### Does the toolbox work in MATLAB Online?
-No, the toolbox requires a pty server to run in the background, which is not possible in the MATLAB Online.
+Yes, the MATLAB Online servers use Ubuntu so you can install the terminal.
+
+Upload the installer to your MATLAB Drive, run it and when it says *100%* click the `x` to stop the installation. The terminal will still be installed correctly.
+
+![](integratedterminal/images/online.png)
