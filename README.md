@@ -4,7 +4,7 @@
 VS Code-style integrated terminal for the MATLAB IDE.
 
 ## Getting Started Guide
-1. Download and install the toolbox from the releases page (https://github.com/ptoshkov/integratedterminal/releases) or the MATLAB Central (https://uk.mathworks.com/matlabcentral/fileexchange/183584-integrated-terminal). You can find it in the Add-On Explorer inside the MATLAB IDE by searching for `IntegratedTerminal` (no spaces).
+1. Download and install the toolbox from the releases page (https://github.com/ptoshkov/integratedterminal/releases) or the MATLAB Central (https://uk.mathworks.com/matlabcentral/fileexchange/183584-integrated-terminal). You can also find it on the Add-On Explorer by searching for `IntegratedTerminal` (no spaces).
 2. Click the APPS tab on the MATLAB Toolstrip.
 3. Click the dropdown arrow to show all apps.
 4. Click the Integrated Terminal app. An integrated terminal with the default profile will be opened.
@@ -22,14 +22,14 @@ A file browser will open showing the contents of the profiles folder. Copy and p
 Go back to the terminal. Right click and select "Open Profile". Double click *custom.json*. A new integrated terminal will be created with the profile *custom.json*.
 
 ### Changing the Shell
-The shell that a profile uses is controlled by the key "Shell Path" in the profile JSON. Assuming you have the shell **magic.exe** installed at **C:/Magic/magic.exe**, you can make a profile use the shell by setting "Shell Path" to:
+The shell that a profile uses is controlled by the key `Shell Path` in the profile JSON. Assuming you have the shell **magic.exe** installed at **C:/Magic/magic.exe**, you can make a profile use the shell by setting `Shell Path` to:
 
 ```
 "Shell Path": "C:/Magic/magic.exe",
 ```
 
 ### Changing the Size
-The size of the terminal is controlled by the "cols" and "rows" keys in the profile JSON:
+The size of the terminal is controlled by the `cols` and `rows` keys in the profile JSON:
 
 ```
 "cols": 80,
@@ -37,7 +37,7 @@ The size of the terminal is controlled by the "cols" and "rows" keys in the prof
 ```
 
 ### Changing the Font
-You can set the key "fontFamily" to any CSS font family string. Refer to <https://www.w3.org/Style/Examples/007/fonts.en.html> for examples. To set the font to Times 8 pt. with fallback Times New Roman and last fallback serif family:
+You can set the key `fontFamily` to any CSS font family string. Refer to <https://www.w3.org/Style/Examples/007/fonts.en.html> for examples. To set the font to Times 8 pt. with fallback Times New Roman and last fallback serif family:
 
 ```
 "fontFamily": "Times, Times New Roman, serif",
@@ -45,7 +45,7 @@ You can set the key "fontFamily" to any CSS font family string. Refer to <https:
 ```
 
 ### Changing the Theme
-The easiest way to change the color theme is to go to <https://glitchbone.github.io/vscode-base16-term/#/>, choose the theme you want and click "Copy to clipboard". Paste the theme in the "theme" key:
+The easiest way to change the color theme is to go to <https://glitchbone.github.io/vscode-base16-term/#/>, choose the theme you want and click "Copy to clipboard". Suppose you have copied the Brushtrees theme. Paste the theme in the `theme` key:
 
 ```
 "theme": {
@@ -112,11 +112,11 @@ Whichever profile is named *default.json* will be used as the default profile.
 Delete *default.json* to reset the default profile to factory settings.
 
 ## Build From Source
-In order to build `Integrated Terminal` from source the following prerequisites need to be installed and on the path:
+In order to build the toolbox from source the following prerequisites need to be installed and on the path:
 - MATLAB R2023a or later (https://www.mathworks.com/products/matlab.html)
 - Node.js with npm (https://nodejs.org/en)
 - pkg (https://github.com/vercel/pkg)
-- GNU Make
+- GNU Make (OS-specific)
 - Pandoc (https://pandoc.org)
 - WeasyPrint (https://weasyprint.org)
 - Bash (on Windows you can use Git Bash or MSYS2)
@@ -130,6 +130,6 @@ Windows, macOS and Linux.
 ### Does the toolbox work in MATLAB Online?
 Yes, the MATLAB Online servers use Ubuntu so you can install the terminal.
 
-Upload the installer to your MATLAB Drive, run it and when it says *100%* click the `x` to stop the installation. The terminal will still be installed correctly.
+Upload the installer to your MATLAB Drive, run it and when it says *100%* click the X to stop the installation. The terminal will still be installed correctly.
 
 ![](integratedterminal/images/online.png)
