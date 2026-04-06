@@ -103,7 +103,26 @@ Now this profile will have the Brushtrees theme:
 
 ![](integratedterminal/images/brushtrees.png)
 
-### Changing the Behavior
+### Changing the Cursor
+You can make the cursor blink by enabling `cursorBlink`:
+
+```
+"cursorBlink": true,
+```
+
+The cursor shape is controlled by the `cursorStyle` key. To use a bar-shaped cursor:
+
+```
+"cursorStyle": "bar",
+```
+
+### Changing the Scrollback
+The scrollback determines the number of lines that are retained. You can change the value by editing the `scrollback` key:
+
+```
+"scrollback": 1000,
+```
+
 ### Adding a Shortcut
 ### Changing the Default Profile
 Whichever profile is named *default.json* will be used as the default profile.
