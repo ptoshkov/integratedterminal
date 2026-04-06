@@ -152,3 +152,14 @@ Yes, the MATLAB Online servers use Ubuntu so you can install the terminal.
 Upload the installer to your MATLAB Drive, run it and when it says *100%* click the X to stop the installation. The terminal will still be installed correctly.
 
 ![](integratedterminal/images/online.png)
+
+### How can I use WSL in the terminal?
+You can set the `Shell Path` to **wsl.exe**. If you want to use a specific distribution that you have installed in WSL, you can set the `Shell Arguments` as well. Suppose you want to use WSL with Fedora:
+
+```
+"Shell Path": "wsl.exe",
+"Shell Arguments": ["-d", "Fedora"],
+```
+
+### How can I customize the prompt (not that prompt)?
+The style of the prompt is controlled by the shell. For example, the PS1 environment variable in Bash controls the prompt. In Windows CMD you can use the `prompt` command to change the prompt.
