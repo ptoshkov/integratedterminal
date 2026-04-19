@@ -149,7 +149,7 @@ Windows, macOS and Linux.
 ### Does the toolbox work in MATLAB Online?
 Yes, the MATLAB Online servers use Ubuntu so you can install the terminal.
 
-Upload the installer to your MATLAB Drive, run it and when it says *100%* click the X to stop the installation. The terminal will still be installed correctly.
+Upload the installer to your MATLAB Drive, run it and when it says *100%* click the X to stop the installation. The terminal will still be installed correctly. Then go ahead and start the terminal from the APPS tab.
 
 ![](integratedterminal/images/online.png)
 
