@@ -44,7 +44,9 @@ classdef integratedterminalpreferences < handle
         end
 
         function delete(obj)
-            delete(obj.json);
+            if isfile(obj.json)
+                delete(obj.json);
+            end
         end
 
         function open(obj, src, event)

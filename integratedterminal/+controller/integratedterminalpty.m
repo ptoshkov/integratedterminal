@@ -12,7 +12,7 @@ classdef integratedterminalpty < handle
             %INTEGRATEDTERMINALPTY Construct an instance of this class
             %   Detailed explanation goes here
             [cd, ~] = fileparts(mfilename("fullpath"));
-            obj.json = cd + "/pty.json";
+            obj.json = tempname() + ".json";
             arg1 = '"' + preferences.json + '"';
             arg2 = '"' + obj.json + '"';
             arg3 = '"' + latch.tmp + '"';
@@ -40,6 +40,12 @@ classdef integratedterminalpty < handle
 
             latch.wait(60);
             obj.pty = jsondecode(fileread(obj.json));
+        end
+
+        function delete(obj)
+            if isfile(obj.json)
+                delete(obj.json);
+            end
         end
     end
 end
