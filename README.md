@@ -132,12 +132,19 @@ Delete *default.json* to reset the default profile to factory settings.
 
 ## Build From Source
 In order to build the toolbox from source the following prerequisites need to be installed and on the path:
+
 - MATLAB R2023a or later (https://www.mathworks.com/products/matlab.html)
+
 - Node.js with npm (https://nodejs.org/en)
+
 - pkg (https://github.com/vercel/pkg)
+
 - GNU Make (OS-specific)
+
 - Pandoc (https://pandoc.org)
+
 - WeasyPrint (https://weasyprint.org)
+
 - Bash (on Windows you can use Git Bash or MSYS2)
 
 Clone the repo and run **build.sh**. The toolbox installer will be located in the folder *build/*.
