@@ -55,6 +55,7 @@ classdef integratedterminal < handle
             data = read(obj.c, 256);
             data = native2unicode(data, 'UTF-8');
             sendEventToHTMLSource(obj.h, 'EventToFrontend', data);
+            pause(0);
         end
 
         function receivedatafromfrontend(obj,src,event)
