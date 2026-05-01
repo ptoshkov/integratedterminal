@@ -16,6 +16,13 @@ classdef integratedterminal < handle
             %   Detailed explanation goes here
             [obj.cd, ~] = fileparts(mfilename("fullpath"));
 
+            %% Set up client
+            obj.c = tcpclient(pty.pty.address, pty.pty.port, ...
+                              'EnableTransferDelay', false);
+            configureCallback(obj.c, ...
+                              'byte', 256, ...
+                              @obj.receivedatafrombackend);
+
             %% Set up figure
             obj.f = uifigure('WindowStyle', 'docked', ...
                              'Name', 'Terminal', ...
@@ -35,12 +42,9 @@ classdef integratedterminal < handle
             uimenu(obj.cm,"Text","Help","MenuSelectedFcn",@obj.help);
             obj.h.ContextMenu = obj.cm;
 
-            %% Set up client
-            obj.c = tcpclient(pty.pty.address, pty.pty.port, ...
-                              'EnableTransferDelay', false);
-            configureCallback(obj.c, ...
-                              'byte', 256, ...
-                              @obj.receivedatafrombackend);
+            % Nudge the PTY process to show the prompt by sending a space
+            % and a backspace
+            write(obj.c, [char(32) char(127)]);
         end
 
         function delete(obj)
