@@ -124,6 +124,16 @@ The scrollback determines the number of lines that are retained. You can change 
 ```
 
 ### Adding a Shortcut
+You can add the app to the quick access toolbar and you'll be able to launch the terminal by pressing Alt + 1.
+1. Go to the HOME tab on on the MATLAB Toolstrip.
+2. Click the Favorites dropdown and select "New Favorite".
+3. Label: Integrated Terminal
+4. Code: `integratedTerminal`
+5. Tick "Add to quick access toolbar".
+6. Click "Save".
+7. Press Alt and the number "1" should show next to the terminal button in the quick access toolbar.
+8. Press Alt + 1 to launch the terminal.
+
 ### Changing the Default Profile
 Whichever profile is named *default.json* will be used as the default profile.
 
