@@ -5,6 +5,7 @@ classdef integratedterminalpreferences < handle
     properties
         destdir
         json
+        preferences
     end
 
     methods
@@ -41,6 +42,17 @@ classdef integratedterminalpreferences < handle
             writecell(jsonwithoutcomments', tmp + ".txt", "QuoteStrings", "none");
             movefile(tmp + ".txt", tmp + ".json");
             obj.json = tmp + ".json";
+
+            %% Parse the JSON file
+            obj.preferences = jsondecode(fileread(obj.json));
+
+            if ~isfield(obj.preferences, 'AudioBell')
+                obj.preferences.AudioBell = false;
+            end
+
+            if ~isfield(obj.preferences, 'VisualBell')
+                obj.preferences.VisualBell = false;
+            end
         end
 
         function delete(obj)

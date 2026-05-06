@@ -7,7 +7,9 @@ classdef integratedterminal < handle
         h
         c
         cd
+        preferences
         cm
+        t
     end
 
     methods
@@ -15,6 +17,7 @@ classdef integratedterminal < handle
             %INTEGRATEDTERMINAL Construct an instance of this class
             %   Detailed explanation goes here
             [obj.cd, ~] = fileparts(mfilename("fullpath"));
+            obj.preferences = preferences;
 
             %% Set up client
             obj.c = tcpclient(pty.pty.address, pty.pty.port, ...
@@ -31,20 +34,23 @@ classdef integratedterminal < handle
             g.RowHeight = {'1x'};
             g.ColumnWidth = {'1x'};
             obj.h = uihtml(g, ...
-                           'Data', fileread(preferences.json), ...
+                           'Data', fileread(obj.preferences.json), ...
                            'HTMLSource', obj.cd + "/../frontend/index.html", ...
                            'HTMLEventReceivedFcn', @obj.receivedatafromfrontend);
             obj.cm = uicontextmenu(obj.f);
             uimenu(obj.cm,"Text","Copy","MenuSelectedFcn",@obj.copy);
             uimenu(obj.cm,"Text","Paste","MenuSelectedFcn",@obj.paste);
-            uimenu(obj.cm,"Text","Open Profile","MenuSelectedFcn",@preferences.open);
-            uimenu(obj.cm,"Text","Edit Profile","MenuSelectedFcn",@preferences.edit);
+            uimenu(obj.cm,"Text","Open Profile","MenuSelectedFcn",@obj.preferences.open);
+            uimenu(obj.cm,"Text","Edit Profile","MenuSelectedFcn",@obj.preferences.edit);
             uimenu(obj.cm,"Text","Help","MenuSelectedFcn",@obj.help);
             obj.h.ContextMenu = obj.cm;
 
             % Nudge the PTY process to show the prompt by sending a space
             % and a backspace
             write(obj.c, [char(32) char(127)]);
+
+            %% Set up timer
+            obj.t = timer('TimerFcn', @obj.resetname, 'StartDelay', 3);
         end
 
         function delete(obj)
@@ -79,6 +85,25 @@ classdef integratedterminal < handle
             if strcmp(event.HTMLEventName, 'ReportSelection')
                 clipboard('copy', event.HTMLEventData);
             end
+
+            if strcmp(event.HTMLEventName, 'RingBell')
+                %% Execute the visual and/or audio bell if enabled
+                if obj.preferences.preferences.AudioBell
+                    beep();
+                end
+
+                if obj.preferences.preferences.VisualBell
+                    obj.f.Name = "Terminal 🔔";
+
+                    %% Restart the timer to clear the visual bell
+                    stop(obj.t);
+                    start(obj.t);
+                end
+            end
+        end
+
+        function resetname(obj, event, text_arg)
+            obj.f.Name = "Terminal";
         end
 
         function copy(obj, src, event)

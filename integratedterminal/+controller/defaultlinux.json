@@ -57,5 +57,11 @@
         "windowOptions": {},
         "windowsPty": {},
         "wordSeparator": " ()[]{}',\"`"
-    }
+    },
+
+    // Enable the terminal bell sound.
+    "Audio Bell": false,
+
+    // Enable the terminal visual bell notification.
+    "Visual Bell": false
 }

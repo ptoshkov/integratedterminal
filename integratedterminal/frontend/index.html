@@ -35,6 +35,10 @@
           function processGetSelection(event) {
             htmlComponent.sendEventToMATLAB("ReportSelection", term.getSelection());
           }
+
+          term.onBell(() => {
+            htmlComponent.sendEventToMATLAB("RingBell", term.getSelection());
+          });
         }
       </script>
     </body>
