@@ -123,6 +123,21 @@ The scrollback determines the number of lines that are retained. You can change 
 "scrollback": 1000,
 ```
 
+### Enabling the Bell
+Two types of terminal bells are supported - `Audio Bell` and `Visual Bell`.
+
+`Audio Bell` rings the system bell and can be enabled with:
+```
+"Audio Bell": true
+```
+
+`Visual Bell` displays a notification in the terminal tab and can be enabled with:
+```
+"Visual Bell": true
+```
+
+_**If the keys `Audio Bell` and `Visual Bell` don't exist in the profile JSON, please create them.**_
+
 ### Adding a Shortcut
 You can add the app to the quick access toolbar and you'll be able to launch the terminal by pressing Alt + 1.
 1. Go to the HOME tab on on the MATLAB Toolstrip.
