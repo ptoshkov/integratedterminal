@@ -45,10 +45,6 @@ classdef integratedterminal < handle
             uimenu(obj.cm,"Text","Help","MenuSelectedFcn",@obj.help);
             obj.h.ContextMenu = obj.cm;
 
-            % Nudge the PTY process to show the prompt by sending a space
-            % and a backspace
-            write(obj.c, [char(32) char(127)]);
-
             %% Set up timer
             obj.t = timer('TimerFcn', @obj.resetname, 'StartDelay', 3);
         end
@@ -71,6 +67,12 @@ classdef integratedterminal < handle
         function receivedatafromfrontend(obj,src,event)
             %RECEIVEDATAFROMFRONTEND Summary of this function goes here
             %   Detailed explanation goes here
+            if strcmp(event.HTMLEventName, 'SetupReady')
+                % Nudge the PTY process to show the prompt by sending a space
+                % and a backspace
+                write(obj.c, [char(32) char(127)]);
+            end
+
             if strcmp(event.HTMLEventName, 'EventToFrontend')
                 write(obj.c, event.HTMLEventData);
             end

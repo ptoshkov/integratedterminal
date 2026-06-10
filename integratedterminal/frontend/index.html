@@ -39,6 +39,8 @@
           term.onBell(() => {
             htmlComponent.sendEventToMATLAB("RingBell", term.getSelection());
           });
+
+          htmlComponent.sendEventToMATLAB("SetupReady");
         }
       </script>
     </body>
