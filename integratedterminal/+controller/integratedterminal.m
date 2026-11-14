@@ -40,8 +40,8 @@ classdef integratedterminal < handle
             obj.cm = uicontextmenu(obj.f);
             uimenu(obj.cm,"Text","Copy","MenuSelectedFcn",@obj.copy);
             uimenu(obj.cm,"Text","Paste","MenuSelectedFcn",@obj.paste);
-            uimenu(obj.cm,"Text","Open Profile","MenuSelectedFcn",@obj.preferences.open);
-            uimenu(obj.cm,"Text","Edit Profile","MenuSelectedFcn",@obj.preferences.edit);
+            uimenu(obj.cm,"Text","Open Profile","MenuSelectedFcn",@obj.open);
+            uimenu(obj.cm,"Text","Edit Profile","MenuSelectedFcn",@obj.edit);
             uimenu(obj.cm,"Text","Help","MenuSelectedFcn",@obj.help);
             obj.h.ContextMenu = obj.cm;
 
@@ -114,6 +114,38 @@ classdef integratedterminal < handle
 
         function paste(obj, src, event)
             write(obj.c, clipboard('paste'));
+        end
+
+        function open(obj, src, event)
+            [file, location] = uigetfile("*.json", "", obj.preferences.destdir);
+
+            if isequal(file,0)
+                % User selected Cancel
+                return;
+            end
+
+            if fullfile(location, file) ~= fullfile(obj.preferences.destdir, file)
+                warning("The selected file is not in the profiles folder.");
+                return;
+            end
+
+            integratedTerminal(string(file));
+        end
+
+        function edit(obj, src, event)
+            [file, location] = uigetfile("*.json", "", obj.preferences.destdir);
+
+            if isequal(file,0)
+                % User selected Cancel
+                return;
+            end
+
+            if fullfile(location, file) ~= fullfile(obj.preferences.destdir, file)
+                warning("The selected file is not in the profiles folder.");
+                return;
+            end
+
+            open(fullfile(location, file));
         end
 
         function help(obj, src, event)

@@ -60,37 +60,5 @@ classdef integratedterminalpreferences < handle
                 delete(obj.json);
             end
         end
-
-        function open(obj, src, event)
-            [file, location] = uigetfile("*.json", "", obj.destdir);
-
-            if isequal(file,0)
-                % User selected Cancel
-                return;
-            end
-
-            if fullfile(location, file) ~= fullfile(obj.destdir, file)
-                warning("The selected file is not in the profiles folder.");
-                return;
-            end
-
-            integratedTerminal(string(file));
-        end
-
-        function edit(obj, src, event)
-            [file, location] = uigetfile("*.json", "", obj.destdir);
-
-            if isequal(file,0)
-                % User selected Cancel
-                return;
-            end
-
-            if fullfile(location, file) ~= fullfile(obj.destdir, file)
-                warning("The selected file is not in the profiles folder.");
-                return;
-            end
-
-            open(fullfile(location, file));
-        end
     end
 end
