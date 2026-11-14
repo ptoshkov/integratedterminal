@@ -38,6 +38,5 @@
 **/slprj
 **/.buildtool/
 
-+controller/pty.json
 backend/index.js
 **/package*.json
