@@ -25,6 +25,6 @@ chmod a+x index-macos
 cd ../..
 
 ## Package toolbox
-cp LICENSE.txt integratedterminal
+cp README.md integratedterminal
 pandoc README.md -o integratedterminal/README.pdf --pdf-engine weasyprint
 matlab -batch "matlab.addons.toolbox.packageToolbox('integratedterminal.prj')"
