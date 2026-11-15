@@ -46,10 +46,14 @@ classdef integratedterminalpreferences < handle
             %% Parse the JSON file
             obj.preferences = jsondecode(fileread(obj.json));
 
+            %% This field is not guaranteed to exist, because it was added
+            %% after v1.0.0, so use a default value if it does not exist
             if ~isfield(obj.preferences, 'AudioBell')
                 obj.preferences.AudioBell = false;
             end
 
+            %% This field is not guaranteed to exist, because it was added
+            %% after v1.0.0, so use a default value if it does not exist
             if ~isfield(obj.preferences, 'VisualBell')
                 obj.preferences.VisualBell = false;
             end
