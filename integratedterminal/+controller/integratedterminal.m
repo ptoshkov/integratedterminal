@@ -8,6 +8,7 @@ classdef integratedterminal < handle
         c
         cd
         preferences
+        pty
         cm
         t
     end
@@ -18,13 +19,7 @@ classdef integratedterminal < handle
             %   Detailed explanation goes here
             [obj.cd, ~] = fileparts(mfilename("fullpath"));
             obj.preferences = preferences;
-
-            %% Set up client
-            obj.c = tcpclient(pty.pty.address, pty.pty.port, ...
-                              'EnableTransferDelay', false);
-            configureCallback(obj.c, ...
-                              'byte', 256, ...
-                              @obj.receivedatafrombackend);
+            obj.pty = pty;
 
             %% Set up figure
             obj.f = uifigure('WindowStyle', 'docked', ...
@@ -55,22 +50,16 @@ classdef integratedterminal < handle
             clear obj.c
         end
 
-        function receivedatafrombackend(obj,src,event)
-            %RECEIVEDATAFROMBACKEND Summary of this function goes here
-            %   Detailed explanation goes here
-            data = read(obj.c, 256);
-            data = native2unicode(data, 'UTF-8');
-            sendEventToHTMLSource(obj.h, 'EventToFrontend', data);
-            pause(0);
-        end
-
         function receivedatafromfrontend(obj,src,event)
             %RECEIVEDATAFROMFRONTEND Summary of this function goes here
             %   Detailed explanation goes here
             if strcmp(event.HTMLEventName, 'SetupReady')
-                % Nudge the PTY process to show the prompt by sending a space
-                % and a backspace
-                write(obj.c, [char(32) char(127)]);
+                %% Set up client
+                obj.c = tcpclient(obj.pty.pty.address, obj.pty.pty.port, ...
+                    'EnableTransferDelay', false);
+                configureCallback(obj.c, ...
+                    'byte', 256, ...
+                    @obj.receivedatafrombackend);
             end
 
             if strcmp(event.HTMLEventName, 'EventToFrontend')
@@ -102,6 +91,15 @@ classdef integratedterminal < handle
                     start(obj.t);
                 end
             end
+        end
+
+        function receivedatafrombackend(obj,src,event)
+            %RECEIVEDATAFROMBACKEND Summary of this function goes here
+            %   Detailed explanation goes here
+            data = read(obj.c, 256);
+            data = native2unicode(data, 'UTF-8');
+            sendEventToHTMLSource(obj.h, 'EventToFrontend', data);
+            pause(0);
         end
 
         function resetname(obj, event, text_arg)
